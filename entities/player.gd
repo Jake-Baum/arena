@@ -1,12 +1,11 @@
-extends Area2D
+extends CharacterBody2D
 
 @export var speed: float = 400
 var screen_size: Vector2
 
 signal hit
 
-func start(pos: Vector2):
-	position = pos
+func start():
 	show()
 	$CollisionShape2D.disabled = false
 
@@ -39,10 +38,4 @@ func _process(delta: float):
 		$AnimatedSprite2D.animation = "up"
 		$AnimatedSprite2D.flip_v = velocity.y > 0
 		
-	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
-
-func _on_body_entered(body: Node2D) -> void:
-	hide()
-	hit.emit()
-	$CollisionShape2D.set_deferred("disabled", true) # must be deferred as we can't change physics properties on a physics callback
+	move_and_collide(velocity * delta)
