@@ -29,6 +29,7 @@ color = Color(1, 0.712086, 0.402004, 1)
 
 [node name="Player" parent="." instance=ExtResource("3_pkg7o")]
 position = Vector2(960, 896)
+debug = true
 
 [node name="HUD" parent="." instance=ExtResource("4_gbfbk")]
 

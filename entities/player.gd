@@ -1,20 +1,25 @@
 extends CharacterBody2D
 
 @export var speed: float = 400
+@export var debug = false:
+	set(value):
+		debug = value
+		if vision:
+			if vision.has_method("set_debug"):
+				vision.set_debug(value)
+		
+@onready var vision = $Vision
+
 var screen_size: Vector2
 
 signal hit
 
-func start():
-	show()
-	$CollisionShape2D.disabled = false
-
-func _ready():
-	screen_size = get_viewport_rect().size
-	hide()
+func _process(delta: float) -> void:
+	if Input.is_action_pressed("cycle_targets"):
+		pass
 	
-func _process(delta: float):
-	var velocity = Vector2.ZERO
+func _physics_process(delta: float) -> void:
+	velocity = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("move_left"):
@@ -27,6 +32,9 @@ func _process(delta: float):
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 		$AnimatedSprite2D.play()
+		
+		if vision:
+			vision.rotation = velocity.angle()
 	else:
 		$AnimatedSprite2D.stop()
 
@@ -38,4 +46,4 @@ func _process(delta: float):
 		$AnimatedSprite2D.animation = "up"
 		$AnimatedSprite2D.flip_v = velocity.y > 0
 		
-	move_and_collide(velocity * delta)
+	move_and_slide()

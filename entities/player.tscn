@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1ylhc7w0tm1b"]
+[gd_scene load_steps=9 format=3 uid="uid://b1ylhc7w0tm1b"]
 
 [ext_resource type="Texture2D" uid="uid://dnxhcjddxaog8" path="res://art/playerGrey_up1.png" id="1_hqtel"]
 [ext_resource type="Script" uid="uid://ckkxptm8dm3jm" path="res://entities/player.gd" id="1_sweqy"]
 [ext_resource type="Texture2D" uid="uid://bqnf7sc7s4d05" path="res://art/playerGrey_up2.png" id="2_sweqy"]
 [ext_resource type="Texture2D" uid="uid://c82n0lwbfpyy" path="res://art/playerGrey_walk1.png" id="3_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://dnjnh4yt216yi" path="res://art/playerGrey_walk2.png" id="4_1jxqw"]
+[ext_resource type="PackedScene" uid="uid://87nkib3714re" path="res://vision.tscn" id="6_qsoyl"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dw050"]
 animations = [{
@@ -43,7 +44,13 @@ metadata/_edit_group_ = true
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_dw050")
 animation = &"up"
-frame_progress = 0.940583
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_b26j0")
+
+[node name="Vision" parent="." instance=ExtResource("6_qsoyl")]
+rotation = 4.71239
+distance = 1000.0
+angle_deg = 170.0
+ray_count = 25
+debug = true
