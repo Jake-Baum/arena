@@ -48,5 +48,3 @@ position = Vector2(944, 448)
 
 [node name="TargetDummy3" parent="." instance=ExtResource("6_dwbse")]
 position = Vector2(1192, 448)
-
-[connection signal="hit" from="Player" to="." method="game_over"]

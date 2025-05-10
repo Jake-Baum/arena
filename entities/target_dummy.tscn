@@ -1,9 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnudt8dob0jyo"]
+[gd_scene load_steps=3 format=3 uid="uid://bnudt8dob0jyo"]
+
+[ext_resource type="PackedScene" uid="uid://depr6yepjx03a" path="res://target_highlight.tscn" id="1_3q1ve"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v51to"]
 size = Vector2(32, 64)
 
 [node name="TargetDummy" type="StaticBody2D"]
+
+[node name="TargetHighlight" parent="." instance=ExtResource("1_3q1ve")]
+position = Vector2(16, 64)
+scale = Vector2(1.5, 1.5)
+is_active = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 32.0

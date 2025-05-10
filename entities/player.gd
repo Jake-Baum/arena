@@ -10,13 +10,17 @@ extends CharacterBody2D
 		
 @onready var vision = $Vision
 
-var screen_size: Vector2
-
-signal hit
+var target: Node2D
+var targetIndex: int = -1
 
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("cycle_targets"):
-		pass
+	if Input.is_action_just_pressed("cycle_targets"):
+		if vision.detected_targets.size() > 0:
+			if target:
+				target.get_node("TargetHighlight").is_active = false
+			targetIndex = (targetIndex + 1) % vision.detected_targets.size()
+			target = vision.detected_targets[targetIndex]
+			target.get_node("TargetHighlight").is_active = true
 	
 func _physics_process(delta: float) -> void:
 	velocity = Vector2.ZERO
