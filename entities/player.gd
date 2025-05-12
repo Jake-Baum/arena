@@ -1,13 +1,15 @@
 extends CharacterBody2D
 
-@export var speed: float = 400
+@export var projectile: PackedScene
+@export_range(0, 1000, 1) var speed: float = 400
 @export var debug = false:
 	set(value):
 		debug = value
 		if vision:
 			if vision.has_method("set_debug"):
 				vision.set_debug(value)
-		
+@export_range(0, 500, 1) var projectile_spawn_distance = 60		
+
 @onready var vision = $Vision
 
 var target: Node2D
@@ -21,6 +23,12 @@ func _process(delta: float) -> void:
 			targetIndex = (targetIndex + 1) % vision.detected_targets.size()
 			target = vision.detected_targets[targetIndex]
 			target.get_node("TargetHighlight").is_active = true
+	
+	if Input.is_action_just_pressed("spell_1") and target:
+		var proj = projectile.instantiate()
+		var direction = (target.global_position - global_position).normalized()
+		proj.init(global_position + direction * projectile_spawn_distance, target)
+		get_tree().current_scene.add_child(proj)
 	
 func _physics_process(delta: float) -> void:
 	velocity = Vector2.ZERO

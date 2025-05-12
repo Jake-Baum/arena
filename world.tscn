@@ -41,10 +41,10 @@ parameters/looping = true
 stream = ExtResource("5_ioo17")
 
 [node name="TargetDummy" parent="." instance=ExtResource("6_dwbse")]
-position = Vector2(696, 448)
+position = Vector2(704, 512)
 
 [node name="TargetDummy2" parent="." instance=ExtResource("6_dwbse")]
-position = Vector2(944, 448)
+position = Vector2(968, 512)
 
 [node name="TargetDummy3" parent="." instance=ExtResource("6_dwbse")]
-position = Vector2(1192, 448)
+position = Vector2(1216, 512)

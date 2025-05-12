@@ -55,12 +55,23 @@ func _update_vision():
 		var direction = Vector2.RIGHT.rotated(angle + rotation)
 		var to = global_position + direction * distance
 		var space_state = get_world_2d().direct_space_state
-
-		var result = space_state.intersect_ray(PhysicsRayQueryParameters2D.create(global_position, to, detect_layer, [self.get_parent()]))
-
-		if result and result.collider and result.collider not in detected_targets:
-			detected_targets.append(result.collider)
-			emit_signal("target_detected", result.collider)
+		
+		var segment = SegmentShape2D.new()
+		segment.a = global_position
+		segment.b = to
+		
+		var query = PhysicsShapeQueryParameters2D.new()
+		query.shape_rid = segment.get_rid()
+		query.transform = Transform2D.IDENTITY
+		query.collide_with_bodies = true
+		query.collide_with_areas = false
+		query.collision_mask = 1
+		
+		var results = space_state.intersect_shape(query)
+		for result in results:
+			if result.collider and result.collider not in detected_targets and result.collider.get_node("TargetHighlight"):
+				detected_targets.append(result.collider)
+				emit_signal("target_detected", result.collider)
 
 func _update_debug_cone():
 	if not debug_cone:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1ylhc7w0tm1b"]
+[gd_scene load_steps=10 format=3 uid="uid://b1ylhc7w0tm1b"]
 
 [ext_resource type="Texture2D" uid="uid://dnxhcjddxaog8" path="res://art/playerGrey_up1.png" id="1_hqtel"]
 [ext_resource type="Script" uid="uid://ckkxptm8dm3jm" path="res://entities/player.gd" id="1_sweqy"]
+[ext_resource type="PackedScene" uid="uid://cokt8txxsnx0g" path="res://spells/projectile.tscn" id="2_6nm46"]
 [ext_resource type="Texture2D" uid="uid://bqnf7sc7s4d05" path="res://art/playerGrey_up2.png" id="2_sweqy"]
 [ext_resource type="Texture2D" uid="uid://c82n0lwbfpyy" path="res://art/playerGrey_walk1.png" id="3_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://dnjnh4yt216yi" path="res://art/playerGrey_walk2.png" id="4_1jxqw"]
@@ -38,6 +39,8 @@ height = 68.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_sweqy")
+projectile = ExtResource("2_6nm46")
+projectile_spawn_distance = 65
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
