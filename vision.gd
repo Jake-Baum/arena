@@ -69,7 +69,7 @@ func _update_vision():
 		
 		var results = space_state.intersect_shape(query)
 		for result in results:
-			if result.collider and result.collider not in detected_targets and result.collider.get_node("TargetHighlight"):
+			if result.collider and result.collider not in detected_targets and result.collider.has_node("TargetHighlight"):
 				detected_targets.append(result.collider)
 				emit_signal("target_detected", result.collider)
 
