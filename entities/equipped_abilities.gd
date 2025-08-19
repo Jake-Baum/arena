@@ -1,6 +1,8 @@
 class_name EquippedAbilities
 extends Node
 
+signal abilities_changed
+
 const MAX_SLOTS := 10
 
 @export var abilities: Array[Ability] = []:
@@ -8,6 +10,10 @@ const MAX_SLOTS := 10
 		assert(value.size() <= MAX_SLOTS, "EquippedAbilities.abilities cannot exceed %d slots" % MAX_SLOTS)
 		
 		abilities = value.duplicate()
+		abilities_changed.emit()
+
+func _ready() -> void:
+	add_to_group("equipped_abilities")
 
 func set_ability(slot_index: int, ability: Ability) -> void:
 	assert(slot_index >= 0, "EquippedAbilities.set_ability: slot_index must be >= 0")
@@ -16,6 +22,7 @@ func set_ability(slot_index: int, ability: Ability) -> void:
 	if slot_index >= abilities.size():
 		abilities.resize(slot_index + 1)
 	abilities[slot_index] = ability
+	abilities_changed.emit()
 
 func get_ability(slot_index: int) -> Ability:
 	assert(slot_index >= 0 and slot_index < MAX_SLOTS, "EquippedAbilities.get_ability: slot_index out of range")

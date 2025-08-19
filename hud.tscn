@@ -4,3 +4,15 @@
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_64ctp")
+
+[node name="AbilityBar" type="PanelContainer" parent="."]
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+offset_bottom = -40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AbilityBar"]
+layout_mode = 2
+alignment = 1

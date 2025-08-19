@@ -40,11 +40,10 @@ animations = [{
 radius = 27.0
 height = 68.0
 
-[sub_resource type="Resource" id="Resource_x08pd"]
+[sub_resource type="Resource" id="Resource_tjdhl"]
 script = ExtResource("10_tjdhl")
-projectile_scene = ExtResource("2_6nm46")
 projectile_spawn_distance = 60.0
-name = "Projectile"
+name = ""
 metadata/_custom_type_script = "uid://d04cikunmak0t"
 
 [node name="Player" type="CharacterBody2D"]
@@ -70,5 +69,5 @@ debug = true
 
 [node name="EquippedAbilities" type="Node" parent="."]
 script = ExtResource("8_ef06p")
-abilities = Array[ExtResource("9_tjdhl")]([SubResource("Resource_x08pd")])
+abilities = Array[ExtResource("9_tjdhl")]([SubResource("Resource_tjdhl")])
 metadata/_custom_type_script = "uid://uv4ukntykbuu"

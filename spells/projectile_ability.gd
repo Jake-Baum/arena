@@ -3,6 +3,16 @@ extends Ability
 
 @export var projectile_scene: PackedScene
 @export_range(0, 500, 1) var projectile_spawn_distance: float = 60
+const DEFAULT_ICON := preload("res://art/Fireball.png")
+const DEFAULT_PROJECTILE_SCENE := preload("res://spells/projectile.tscn")
+
+func _init() -> void:
+	if name == "":
+		name = "Projectile"
+	if icon == null:
+		icon = DEFAULT_ICON
+	if projectile_scene == null:
+		projectile_scene = DEFAULT_PROJECTILE_SCENE
 
 func use(user: Node2D, target: Node2D) -> void:
 	assert(projectile_scene != null, "ProjectileAbility.use: projectile_scene must be assigned")
