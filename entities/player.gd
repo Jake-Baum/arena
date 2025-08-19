@@ -19,13 +19,14 @@ var targetIndex: int = -1
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("cycle_targets"):
 		if vision.detected_targets.size() > 0:
-			if target:
+			if target and is_instance_valid(target):
 				target.get_node("TargetHighlight").is_active = false
 			targetIndex = (targetIndex + 1) % vision.detected_targets.size()
 			target = vision.detected_targets[targetIndex]
-			target.get_node("TargetHighlight").is_active = true
+			if is_instance_valid(target):
+				target.get_node("TargetHighlight").is_active = true
 	
-	if Input.is_action_just_pressed("spell_1") and target:
+	if Input.is_action_just_pressed("spell_1") and target and is_instance_valid(target):
 		if equipped:
 			equipped.use_slot(0, self, target)
 	

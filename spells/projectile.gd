@@ -5,10 +5,12 @@ extends RigidBody2D
 
 var _target: Node2D
 var initialized = false
+var _last_known_target_position: Vector2
 
 func init(relative_position: Vector2, target: Node2D) -> void:
 	global_position = relative_position
 	_target = target
+	_last_known_target_position = target.global_position
 	initialized = true
 	
 func _ready() -> void:
@@ -17,6 +19,9 @@ func _ready() -> void:
 	rotate_towards_target()
 
 func _physics_process(delta: float) -> void:
+	if not is_instance_valid(_target):
+		queue_free()
+		return
 	var direction = (_target.global_position - global_position).normalized()
 	rotate_towards_target()
 	linear_velocity = direction * speed
@@ -28,4 +33,6 @@ func _on_body_entered(body: Node) -> void:
 	queue_free()
 
 func rotate_towards_target():
+	if not is_instance_valid(_target):
+		return
 	set_global_rotation((_target.global_position - global_position).angle())
