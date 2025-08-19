@@ -11,6 +11,7 @@ extends CharacterBody2D
 @export_range(0, 500, 1) var projectile_spawn_distance = 60		
 
 @onready var vision = $Vision
+@onready var equipped: EquippedAbilities = get_node_or_null("EquippedAbilities")
 
 var target: Node2D
 var targetIndex: int = -1
@@ -25,10 +26,8 @@ func _process(delta: float) -> void:
 			target.get_node("TargetHighlight").is_active = true
 	
 	if Input.is_action_just_pressed("spell_1") and target:
-		var proj = projectile.instantiate()
-		var direction = (target.global_position - global_position).normalized()
-		proj.init(global_position + direction * projectile_spawn_distance, target)
-		get_tree().current_scene.add_child(proj)
+		if equipped:
+			equipped.use_slot(0, self, target)
 	
 func _physics_process(delta: float) -> void:
 	velocity = Vector2.ZERO
