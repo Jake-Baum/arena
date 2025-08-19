@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnudt8dob0jyo"]
+[gd_scene load_steps=5 format=3 uid="uid://bnudt8dob0jyo"]
 
 [ext_resource type="PackedScene" uid="uid://depr6yepjx03a" path="res://target_highlight.tscn" id="1_3q1ve"]
+[ext_resource type="PackedScene" uid="uid://bveknqwuci40c" path="res://entities/stats.tscn" id="2_2k4m3"]
+[ext_resource type="Script" uid="uid://c04uvw04fl75m" path="res://entities/target_dummy.gd" id="3_2k4m3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v51to"]
 size = Vector2(32, 64)
 
 [node name="TargetDummy" type="StaticBody2D"]
+script = ExtResource("3_2k4m3")
 metadata/_edit_group_ = true
 
 [node name="TargetHighlight" parent="." instance=ExtResource("1_3q1ve")]
@@ -22,3 +25,8 @@ color = Color(0.470588, 0.317647, 0.0901961, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_v51to")
+
+[node name="Stats" parent="." instance=ExtResource("2_2k4m3")]
+max_health = 5.0
+
+[connection signal="health_depleted" from="Stats" to="." method="_on_health_depleted"]

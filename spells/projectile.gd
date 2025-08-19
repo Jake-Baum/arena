@@ -22,8 +22,9 @@ func _physics_process(delta: float) -> void:
 	linear_velocity = direction * speed
 
 func _on_body_entered(body: Node) -> void:
-	if body.has_method("damage"):
-		body.damage(damage)
+	var stats = body.get_node_or_null("Stats")
+	if stats:
+		stats.modify_health(-damage)
 	queue_free()
 
 func rotate_towards_target():
